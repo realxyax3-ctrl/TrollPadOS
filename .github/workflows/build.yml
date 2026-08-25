@@ -41,6 +41,11 @@ jobs:
           echo 'SDKs:'
           find "$HOME/theos/sdks" -maxdepth 1 -type d -name 'iPhoneOS*.sdk' -print
 
+      - name: Patch logos for LLVM-10
+        run: |
+          sed -i '/linker_option/d' "$HOME/theos/vendor/logos/bin/lib/Logos/Generator/MobileSubstrate/Generator.pm"
+          grep -c "linker_option" "$HOME/theos/vendor/logos/bin/lib/Logos/Generator/MobileSubstrate/Generator.pm" || echo "linker_option removed"
+
       - name: Build rootless
         run: |
           export THEOS="$HOME/theos"
@@ -49,6 +54,14 @@ jobs:
           make package FINALPACKAGE=1
           mkdir -p out/rootless
           cp packages/*.deb out/rootless/
+
+      - name: Save preprocessed sources on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preprocessed-tweak-x
+          path: .theos/obj/**/*
+          if-no-files-found: ignore
 
       - name: Build rootful
         run: |
