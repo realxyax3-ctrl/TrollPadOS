@@ -55,12 +55,21 @@ jobs:
           mkdir -p out/rootless
           cp packages/*.deb out/rootless/
 
-      - name: Save preprocessed sources on failure
+      - name: Dump generated logos source on failure
+        if: failure()
+        run: |
+          export THEOS="$HOME/theos"
+          mkdir -p logosdump
+          cp -f Tweak.x logosdump/input.Tweak.x
+          "$THEOS/vendor/logos/bin/logos.pl" logosdump/input.Tweak.x > logosdump/generated.Tweak.m 2>logosdump/logos.err || true
+          wc -l logosdump/generated.Tweak.m || true
+
+      - name: Upload debug dump on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: preprocessed-tweak-x
-          path: .theos/obj/**/*
+          name: logos-dump
+          path: logosdump/
           if-no-files-found: ignore
 
       - name: Build rootful
