@@ -10,4 +10,13 @@ TrollPadOS_FILES = Tweak.x
 TrollPadOS_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
 TrollPadOS_FRAMEWORKS = UIKit Foundation AVKit
 
+TrollPadOSPrefs_FILES = prefs/TrollPadOSPrefs.m
+TrollPadOSPrefs_RESOURCE_DIRS = prefs/Resources
+TrollPadOSPrefs_BUNDLE_NAME = TrollPadOS
+TrollPadOSPrefs_INSTALL_PATH = /Library/PreferenceBundles
+TrollPadOSPrefs_FRAMEWORKS = Foundation UIKit
+TrollPadOSPrefs_PRIVATE_FRAMEWORKS = Preferences
+TrollPadOSPrefs_CFLAGS = -fobjc-arc
+
 include $(THEOS_MAKE_PATH)/tweak.mk
+include $(THEOS_MAKE_PATH)/bundle.mk
