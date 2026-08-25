@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+﻿#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
 
@@ -49,27 +49,45 @@ static BOOL TPOSLandscape(void) { return TPOSEnabled() && TPOSBool(@"TPOSAllowLa
 %group TPSpringBoard
 
 %hook SBTraitsPipelineManager
-- (BOOL)isDevicePad { return TPOSEnabled() ? YES : %orig; }
+- (BOOL)isDevicePad  {
+    return TPOSEnabled() ? YES : %orig;
+}
 %end
 
 %hook UIStatusBarWindow
-- (UIUserInterfaceIdiom)idiom { return TPOSEnabled() ? UIUserInterfaceIdiomPad : %orig; }
+- (UIUserInterfaceIdiom)idiom  {
+    return TPOSEnabled() ? UIUserInterfaceIdiomPad : %orig;
+}
 %end
 
 %hook SBMedusaConfigurationUsageMetric
-- (BOOL)isMedusaCapable { return TPOSWindowing() ? YES : %orig; }
-- (BOOL)isMedusaEnabled { return TPOSWindowing() ? YES : %orig; }
-- (unsigned long long)medusaCapabilities { return TPOSWindowing() ? ~0ULL : %orig; }
+- (BOOL)isMedusaCapable  {
+    return TPOSWindowing() ? YES : %orig;
+}
+- (BOOL)isMedusaEnabled  {
+    return TPOSWindowing() ? YES : %orig;
+}
+- (unsigned long long)medusaCapabilities  {
+    return TPOSWindowing() ? ~0ULL : %orig;
+}
 %end
 
 %hook SBAppSwitcherSettings
-- (BOOL)isMedusaEnabled { return TPOSWindowing() ? YES : %orig; }
-- (BOOL)isMedusaCapable { return TPOSWindowing() ? YES : %orig; }
-- (unsigned long long)medusaCapabilities { return TPOSWindowing() ? ~0ULL : %orig; }
+- (BOOL)isMedusaEnabled  {
+    return TPOSWindowing() ? YES : %orig;
+}
+- (BOOL)isMedusaCapable  {
+    return TPOSWindowing() ? YES : %orig;
+}
+- (unsigned long long)medusaCapabilities  {
+    return TPOSWindowing() ? ~0ULL : %orig;
+}
 %end
 
 %hook SBPlatformController
-- (BOOL)isMedusaEnabled { return TPOSWindowing() ? YES : %orig; }
+- (BOOL)isMedusaEnabled  {
+    return TPOSWindowing() ? YES : %orig;
+}
 %end
 
 %hook SBMainWorkspace
@@ -79,8 +97,12 @@ static BOOL TPOSLandscape(void) { return TPOSEnabled() && TPOSBool(@"TPOSAllowLa
 %end
 
 %hook SBSwitcherChamoisSettings
-- (BOOL)chamoisEnabled { return TPOSStage() ? YES : %orig; }
-- (BOOL)hasEverUsedChamois { return TPOSStage() ? YES : %orig; }
+- (BOOL)chamoisEnabled  {
+    return TPOSStage() ? YES : %orig;
+}
+- (BOOL)hasEverUsedChamois  {
+    return TPOSStage() ? YES : %orig;
+}
 - (long long)maximumNumberOfAppsOnStage {
     NSInteger n = TPOSInt(@"TPOSMaxAppsOnStage", 4);
     n = MAX(1, MIN(8, n));
@@ -95,11 +117,13 @@ static BOOL TPOSLandscape(void) { return TPOSEnabled() && TPOSBool(@"TPOSAllowLa
 %end
 
 %hook SBChamoisHideDock
-- (BOOL)isHidden { return TPOSStage() ? TPOSBool(@"TPOSChamoisHideDock", NO) : %orig; }
+- (BOOL)isHidden  {
+    return TPOSStage() ? TPOSBool(@"TPOSChamoisHideDock", NO) : %orig;
+}
 %end
 
 // -----------------------------------------------------------------------------
-// Requested merged "Quản lý màn hình" group.
+// Requested merged "Quáº£n lÃ½ mÃ n hÃ¬nh" group.
 // -----------------------------------------------------------------------------
 %hook SBAppResizeGrabberView
 - (void)setHidden:(BOOL)arg1 {
@@ -141,20 +165,30 @@ static BOOL TPOSLandscape(void) { return TPOSEnabled() && TPOSBool(@"TPOSAllowLa
 - (BOOL)SBAppLibraryInDockEnabled {
     return TPOSEnabled() && TPOSBool(@"TPOSAppLibraryInDock", YES);
 }
-- (BOOL)_deviceSupportsEnhancedMultitasking { return TPOSEnabled() ? YES : %orig; }
+- (BOOL)_deviceSupportsEnhancedMultitasking  {
+    return TPOSEnabled() ? YES : %orig;
+}
 %end
 
 %hook SBDockView
-- (BOOL)shouldShowRecents { return TPOSEnabled() && TPOSBool(@"TPOSRecentsInDock", YES); }
+- (BOOL)shouldShowRecents  {
+    return TPOSEnabled() && TPOSBool(@"TPOSRecentsInDock", YES);
+}
 %end
 
 %hook SBFloatingDockController
-- (BOOL)isFloatingDockSupported { return TPOSEnabled() && TPOSBool(@"TPOSFloatingDock", YES); }
+- (BOOL)isFloatingDockSupported  {
+    return TPOSEnabled() && TPOSBool(@"TPOSFloatingDock", YES);
+}
 %end
 
 %hook SBHomeGestureSettings
-- (BOOL)homeScreenRotationEnabled { return TPOSLandscape() ? YES : %orig; }
-- (long long)homeScreenRotationStyle { return TPOSLandscape() ? 2LL : %orig; }
+- (BOOL)homeScreenRotationEnabled  {
+    return TPOSLandscape() ? YES : %orig;
+}
+- (long long)homeScreenRotationStyle  {
+    return TPOSLandscape() ? 2LL : %orig;
+}
 %end
 
 %hook SBCoverSheetPrimarySlidingViewController
