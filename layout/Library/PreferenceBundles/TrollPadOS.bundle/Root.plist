@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>items</key><array>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>TrollPadOS — iPadOS 18 inspired</string><key>footerText</key><string>Đây là lớp tương thích iPadOS cho iPhone jailbreak. Các mục không thể tái tạo an toàn bằng tweak sẽ không được giả lập.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSEnable</string><key>label</key><string>Kích hoạt TrollPadOS</string></dict>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>QUẢN LÝ MÀN HÌNH</string><key>footerText</key><string>Ba công tắc gộp trong một nhóm. Khi bật Toàn màn hình, cửa sổ co giãn bị tắt để tránh xung đột.</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSFullscreenAppsOnly</string><key>label</key><string>Ứng dụng toàn màn hình</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSWindowedApps</string><key>label</key><string>Ứng dụng có cửa sổ</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSDisplayArrangement</string><key>label</key><string>Quản lý màn hình</string></dict>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>ĐA NHIỆM &amp; STAGE MANAGER</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSStageManager</string><key>label</key><string>Stage Manager</string></dict>
+<dict><key>cell</key><string>PSSliderCell</string><key>default</key><integer>4</integer><key>min</key><integer>1</integer><key>max</key><integer>8</integer><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSMaxAppsOnStage</string><key>label</key><string>Số ứng dụng trên Stage</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSForceMedusaLandscapeOnlyApps</string><key>label</key><string>Ép windowing cho ứng dụng chỉ hỗ trợ dọc</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSIPadSwitcherAnimation</string><key>label</key><string>Switcher kiểu iPad</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSChamoisHideDock</string><key>label</key><string>Ẩn Dock trong Stage Manager</string></dict>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>HOME SCREEN &amp; DOCK</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSAllowLandscapeHomeScreen</string><key>label</key><string>Home Screen xoay ngang</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSAppLibraryInDock</string><key>label</key><string>App Library trong Dock</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSRecentsInDock</string><key>label</key><string>Ứng dụng gần đây trong Dock</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSFloatingDock</string><key>label</key><string>Floating Dock</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSGlobalPadTraits</string><key>label</key><string>Ép giao diện UIKit nhận diện kiểu iPad</string></dict>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>BÀN PHÍM &amp; INPUT</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSKeyboardShortcutButtons</string><key>label</key><string>Thanh shortcut bàn phím</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><true/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSSpoofIdiomKeyboard</string><key>label</key><string>Bàn phím nhận diện kiểu iPad</string></dict>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>MÀN HÌNH NGOÀI</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSAirPlayExternalDisplay</string><key>label</key><string>External Display / AirPlay</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSExternalDisplayStageManager</string><key>label</key><string>Stage Manager trên màn hình ngoài</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSExternalDisplayFullScreen</string><key>label</key><string>Ứng dụng toàn màn hình trên màn hình ngoài</string></dict>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>MEDIA &amp; VIDEO</string></dict>
+<dict><key>cell</key><string>PSSwitchCell</string><key>default</key><false/><key>defaults</key><string>com.trollpados</string><key>key</key><string>TPOSPictureInPicture</string><key>label</key><string>Picture in Picture</string></dict>
+
+<dict><key>cell</key><string>PSGroupCell</string><key>label</key><string>GHI CHÚ VỀ iPadOS 18</string><key>footerText</key><string>iPadOS 18 còn có Calculator/Math Notes, Smart Script, Photos redesign, Messages effects, Passwords, SharePlay remote control, Safari Highlights, Apple Intelligence và nhiều thay đổi trong ứng dụng hệ thống. Các phần phụ thuộc app riêng, framework riêng, entitlement hoặc phần cứng không được giả lập bằng hook SpringBoard.</string></dict>
+
+</array></dict></plist>

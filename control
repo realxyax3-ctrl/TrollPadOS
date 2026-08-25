@@ -1,0 +1,9 @@
+Package: com.trollpados
+Name: TrollPadOS
+Version: 4.0.0
+Architecture: iphoneos-arm64
+Description: TrollPadOS iPadOS 18-inspired compatibility layer for jailbroken iPhone. Provides independently configurable iPad-style multitasking, Stage Manager, display management, Home Screen rotation, Dock, keyboard UI, global iPad traits, external display and PiP capability hooks. Supports rootless and rootful packaging.
+Maintainer: TrollPadOS Project
+Author: TrollPadOS Project
+Section: Tweaks
+Depends: firmware (>= 15.0), firmware (<< 99.0)

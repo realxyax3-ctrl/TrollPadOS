@@ -1,0 +1,64 @@
+name: Build TrollPadOS deb
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git curl unzip perl fakeroot make clang
+
+      - name: Install Theos
+        run: |
+          git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
+          echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+
+      - name: Install SDK
+        run: |
+          cd "$HOME/theos"
+          curl -L https://github.com/theos/sdks/archive/refs/heads/master.zip -o sdks.zip
+          unzip -q sdks.zip
+          mkdir -p "$HOME/theos/sdks"
+          find . -type d -name 'iPhoneOS*.sdk' -exec cp -R {} "$HOME/theos/sdks/" \;
+          echo 'SDKs:'
+          find "$HOME/theos/sdks" -maxdepth 1 -type d -name 'iPhoneOS*.sdk' -print
+
+      - name: Build rootless
+        run: |
+          export THEOS="$HOME/theos"
+          export THEOS_PACKAGE_SCHEME=rootless
+          make clean || true
+          make package FINALPACKAGE=1
+          mkdir -p out/rootless
+          cp packages/*.deb out/rootless/
+
+      - name: Build rootful
+        run: |
+          export THEOS="$HOME/theos"
+          export THEOS_PACKAGE_SCHEME=rootful
+          make clean || true
+          rm -rf packages && mkdir -p packages
+          make package FINALPACKAGE=1
+          mkdir -p out/rootful
+          cp packages/*.deb out/rootful/
+
+      - name: Verify artifacts
+        run: |
+          test -n "$(find out -name '*.deb' -type f -print -quit)"
+          find out -name '*.deb' -type f -print
+
+      - name: Upload DEBs
+        uses: actions/upload-artifact@v4
+        with:
+          name: TrollPadOS-debs
+          path: out/**/*.deb
+          if-no-files-found: error
