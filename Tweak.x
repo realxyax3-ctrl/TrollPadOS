@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
+#include <stdio.h>
 
 static NSString * const kTPOSDomain = @"com.trollpados";
 
@@ -243,16 +244,52 @@ static BOOL TPOSLandscape(void) { return TPOSEnabled() && TPOSBool(@"TPOSAllowLa
 %end
 %end // TPAVKit
 
+static void TPOSDiagLog(NSString *msg) {
+    NSLog(@"[TrollPadOS] %@", msg);
+    NSString *line = [NSString stringWithFormat:@"[%@] %@\n", [NSDate date], msg];
+    FILE *f = fopen("/var/mobile/Documents/TrollPadOS_log.txt", "a");
+    if (f) {
+        fputs(line.UTF8String, f);
+        fclose(f);
+    }
+}
+
 %ctor {
+    NSMutableString *diag = [NSMutableString stringWithFormat:@"ctor in process %@ | iOS %@ | groups:",
+        [NSProcessInfo processInfo].processName,
+        [UIDevice currentDevice].systemVersion];
+
     if (objc_getClass("UITraitCollection")) {
         %init(TPUIKitTraits);
+        [diag appendString:@" TPUIKitTraits"];
     }
+
+    NSArray *sbClasses = @[@"SBApplication", @"SBMainWorkspace", @"SBTraitsPipelineManager",
+        @"SBMedusaConfigurationUsageMetric", @"SBAppSwitcherSettings", @"SBPlatformController",
+        @"SBSwitcherChamoisSettings", @"SBChamoisExternalDisplayController", @"SBChamoisHideDock",
+        @"SBAppResizeGrabberView", @"SBSwitcherChamoisLayoutAttributes",
+        @"SBExternalDisplayRuntimeAvailabilitySettings", @"SBExternalDisplayController",
+        @"SBHomeScreenViewController", @"SBDockView", @"SBFloatingDockController",
+        @"SBHomeGestureSettings", @"SBCoverSheetPrimarySlidingViewController",
+        @"SBFullScreenSwitcherLiveContentOverlayCoordinator",
+        @"UIKeyboardImpl", @"UIKeyboardDockView", @"UISystemInputAssistantViewController"];
+    NSMutableArray *missing = [NSMutableArray array];
+    for (NSString *cls in sbClasses) {
+        if (!objc_getClass(cls.UTF8String)) [missing addObject:cls];
+    }
+    [diag appendFormat:@" | missingClasses:%@", missing.count ? missing : @"(none)"];
 
     if (objc_getClass("SBApplication") || objc_getClass("SBMainWorkspace") || objc_getClass("SBTraitsPipelineManager")) {
         %init(TPSpringBoard);
+        [diag appendString:@" | TPSpringBoard=INIT"];
+    } else {
+        [diag appendString:@" | TPSpringBoard=SKIP"];
     }
 
     if (objc_getClass("AVPictureInPictureController")) {
         %init(TPAVKit);
+        [diag appendString:@" | TPAVKit=INIT"];
     }
+
+    TPOSDiagLog(diag);
 }
