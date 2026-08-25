@@ -75,10 +75,10 @@ jobs:
       - name: Build rootful
         run: |
           export THEOS="$HOME/theos"
-          export THEOS_PACKAGE_SCHEME=rootful
+          unset THEOS_PACKAGE_SCHEME
           make clean || true
           rm -rf packages && mkdir -p packages
-          make package FINALPACKAGE=1
+          make package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=
           mkdir -p out/rootful
           cp packages/*.deb out/rootful/
 
