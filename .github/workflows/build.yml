@@ -22,6 +22,13 @@ jobs:
           git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
           echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
 
+      - name: Install iOS toolchain
+        run: |
+          curl -LO https://github.com/sbingner/llvm-project/releases/latest/download/linux-ios-arm64e-clang-toolchain.tar.lzma
+          mkdir -p "$HOME/theos/toolchain/linux/iphone"
+          tar --lzma -xf linux-ios-arm64e-clang-toolchain.tar.lzma -C "$HOME/theos/toolchain/linux/iphone" --strip-components=1
+          "$HOME/theos/toolchain/linux/iphone/bin/clang" --version | head -n1
+
       - name: Install SDK
         run: |
           cd "$HOME/theos"

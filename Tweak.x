@@ -194,6 +194,8 @@ static BOOL TPOSLandscape(void) { return TPOSEnabled() && TPOSBool(@"TPOSAllowLa
 }
 %end
 
+%end // TPSpringBoard
+
 // -----------------------------------------------------------------------------
 // iPadOS-style Picture in Picture compatibility when the AVKit class is present.
 // This enables the capability advertisement only; actual PiP still depends on
@@ -205,9 +207,7 @@ static BOOL TPOSLandscape(void) { return TPOSEnabled() && TPOSBool(@"TPOSAllowLa
     return TPOSEnabled() && TPOSBool(@"TPOSPictureInPicture", NO) ? YES : %orig;
 }
 %end
-%end
-
-%end
+%end // TPAVKit
 
 %ctor {
     if (objc_getClass("UITraitCollection")) {
